@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	
+	<bean id="houseMagDao" class="com.sise.cwh.estate.dao.impl.HouseMagDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="roleMenuDao" class="com.sise.cwh.estate.dao.impl.RoleMenuDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="wrkrInfoDao" class="com.sise.cwh.estate.dao.impl.WrkrInfoDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="buildMagDao" class="com.sise.cwh.estate.dao.impl.BuildMagDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="cusInfoDao" class="com.sise.cwh.estate.dao.impl.CusInfoDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="houseSellDao" class="com.sise.cwh.estate.dao.impl.HouseSellDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="cusLikeHosDao" class="com.sise.cwh.estate.dao.impl.CusLikeHosDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="intrateMagDao" class="com.sise.cwh.estate.dao.impl.IntrateMagDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="bystgPayCrcsDao" class="com.sise.cwh.estate.dao.impl.BystgPayCrcsDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="houseMagServiceBase" class="com.sise.cwh.estate.service.impl.HouseMagServiceImpl">
+		<property name="houseMagDao" ref="houseMagDao"></property>
+	</bean>
+	<bean id="roleMenuServiceBase" class="com.sise.cwh.estate.service.impl.RoleMenuServiceImpl">
+		<property name="roleMenuDao" ref="roleMenuDao"></property>
+	</bean>
+	<bean id="wrkrInfoServiceBase" class="com.sise.cwh.estate.service.impl.WrkrInfoServiceImpl">
+		<property name="wrkrInfoDao" ref="wrkrInfoDao"></property>
+	</bean>
+	<bean id="cusInfoServiceBase" class="com.sise.cwh.estate.service.impl.CusInfoServiceImpl">
+		<property name="cusInfoDao" ref="cusInfoDao"></property>
+	</bean>
+	<bean id="houseSellServiceBase" class="com.sise.cwh.estate.service.impl.HouseSellServiceImpl">
+		<property name="houseSellDao" ref="houseSellDao"></property>
+		<property name="cusInfoDao" ref="cusInfoDao"></property>
+		<property name="bystgPayCrcsDao" ref="bystgPayCrcsDao"></property>
+	</bean>
+	<bean id="buildMagServiceBase" class="com.sise.cwh.estate.service.impl.BuildMagServiceImpl">
+		<property name="buildMagDao" ref="buildMagDao"></property>
+		<property name="houseMagDao" ref="houseMagDao"></property>
+	</bean>
+	<bean id="intrateMagServiceBase" class="com.sise.cwh.estate.service.impl.IntrateMagServiceImpl">
+		<property name="intrateMagDao" ref="intrateMagDao"></property>
+	</bean>
+	<bean id="cusLikeHosServiceBase" class="com.sise.cwh.estate.service.impl.CusLikeHosServiceImpl">
+		<property name="cusLikeHosDao" ref="cusLikeHosDao"></property>
+	</bean>
+	<bean id="bystgPayCrcsServiceBase" class="com.sise.cwh.estate.service.impl.BystgPayCrcsServiceImpl">
+		<property name="bystgPayCrcsDao" ref="bystgPayCrcsDao"></property>
+	</bean>
+	<bean id="queryFactoryBase" class="com.sise.cwh.estate.util.QueryFactory">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	
+	<!-- 此处为代理 -->
+	<bean name="houseMagService" parent="transactionProxy">
+		<property name="target" ref="houseMagServiceBase"></property>
+	</bean>	
+	<bean name="roleMenuService" parent="transactionProxy">
+		<property name="target" ref="roleMenuServiceBase"></property>
+	</bean>	
+	<bean name="wrkrInfoService" parent="transactionProxy">
+		<property name="target" ref="wrkrInfoServiceBase"></property>
+	</bean>	
+	<bean name="cusInfoService" parent="transactionProxy">
+		<property name="target" ref="cusInfoServiceBase"></property>
+	</bean>	
+	<bean name="buildMagService" parent="transactionProxy">
+		<property name="target" ref="buildMagServiceBase"></property>
+	</bean>	
+	<bean name="houseSellService" parent="transactionProxy">
+		<property name="target" ref="houseSellServiceBase"></property>
+	</bean>	
+	<bean name="intrateMagService" parent="transactionProxy">
+		<property name="target" ref="intrateMagServiceBase"></property>
+	</bean>	
+	<bean name="cusLikeHosService" parent="transactionProxy">
+		<property name="target" ref="cusLikeHosServiceBase"></property>
+	</bean>	
+	<bean name="bystgPayCrcsService" parent="transactionProxy">
+		<property name="target" ref="bystgPayCrcsServiceBase"></property>
+	</bean>	
+	<bean name="queryFactory" parent="transactionProxy">
+		<property name="target" ref="queryFactoryBase"></property>
+	</bean>
+</beans>

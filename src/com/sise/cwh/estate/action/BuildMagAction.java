@@ -29,7 +29,7 @@ public class BuildMagAction {
 	private QueryFactory queryFactory;
 	
 	/**
-	 * 查询出所有楼房信息
+	 * 查询出所有楼房信息,
 	 * @param response
 	 * @param request
 	 * @return
